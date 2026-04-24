@@ -4,10 +4,16 @@ import express from 'express';
 
 import models from './models';
 import routes from './routes';
+import { default: ssrfProtection } from './middleware/ssrf';
 
 const app = express();
 
 // * Application-Level Middleware * //
+
+// Security Middleware
+
+// SSRF Protection - must be early in middleware stack
+app.use(ssrfProtection());
 
 // Third-Party Middleware
 
